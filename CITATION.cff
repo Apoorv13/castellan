@@ -8,6 +8,8 @@ authors:
 version: 0.0.1
 date-released: 2026-11-17
 license: Apache-2.0
+repository-code: "https://github.com/Apoorv13/castellan"
+url: "https://github.com/Apoorv13/castellan"
 keywords:
   - secret detection
   - PII detection

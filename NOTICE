@@ -1,0 +1,43 @@
+CASTELLAN
+Copyright 2026 Apoorv Dayal
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+The eval data release assets are licensed under CC-BY-4.0 (see LICENSE-DATA.md).
+
+-------------------------------------------------------------------------------
+Third-party material
+
+src/castellan/data/lookalikes.py and src/castellan/data/README.md quote short
+allowlist patterns and example values from the projects below, to build benign
+lookalike training documents. Each quote is cited in the docstring of the
+category that uses it.
+
+  Gitleaks
+    https://github.com/gitleaks/gitleaks
+    Default config, tag v8.30.1 (commit 83d9cd684c87d95d656c1458ef04895a7f1cbd8e),
+    config/gitleaks.toml: global allowlist regexes, paths and stopwords, and
+    rule-level allowlists (generic-api-key, curl-auth-user, aws-access-token,
+    gcp-api-key, private-key).
+    Copyright (c) 2019 Zachary Rice
+    Licensed under the MIT License.
+
+  detect-secrets
+    https://github.com/Yelp/detect-secrets
+    Commit 5e141933554a0b74e7341841f318be21e895339c,
+    detect_secrets/filters/heuristic.py: heuristic filter names and patterns
+    (is_templated_secret, is_indirect_reference, is_potential_uuid,
+    is_likely_id_string, is_sequential_string, is_not_alphanumeric_string,
+    is_lock_file, is_prefixed_with_dollar_sign).
+    By Yelp, Inc. and contributors.
+    Licensed under the Apache License, Version 2.0.
+
+Documented example values, used as published, from public documentation:
+  - AWS IAM and AWS CLI user guides (example access key id and secret key)
+  - RFC 7519, section 3.1 (example JWT)
+  - RFC 2397 (data URI examples)
+  - Slack API docs, "Cursor-based pagination" (example cursors)
+
+Gitleaks (CLI, MIT) and Presidio (presidio-analyzer, MIT) with the spaCy model
+en_core_web_lg (MIT) are used as baselines. They are installed separately and
+not included in this repository. Qwen3 model weights (Apache-2.0) are downloaded
+from Hugging Face at run time and not included.

@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use CASTELLAN or its eval sets, please cite it as below."
+title: "CASTELLAN: residual-stream probes for secrets and PII in LLM and agent traffic, measured across an obfuscation ladder"
+type: software
+authors:
+  - family-names: Dayal
+    given-names: Apoorv
+version: 0.0.1
+date-released: 2026-11-17
+license: Apache-2.0
+keywords:
+  - secret detection
+  - PII detection
+  - interpretability
+  - linear probes
+  - residual stream
+  - LLM security
+  - obfuscation
+abstract: >-
+  CASTELLAN detects secrets and PII in LLM and agent traffic by reading a
+  language model's residual-stream activations with small trained probes. It
+  returns character spans, class labels and calibrated scores. The project
+  measures how probe recall holds up as a secret is disguised past regex
+  scanners (split, encoded, homoglyphs, spelled out, reassembled across turns),
+  compares it with Gitleaks and Presidio, and relates it to whether the model
+  can read the disguised secret, across Qwen3 0.6B to 8B. Code is Apache-2.0;
+  the synthetic eval sets are CC-BY-4.0.

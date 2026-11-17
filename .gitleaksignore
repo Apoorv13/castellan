@@ -1,0 +1,12 @@
+# Known harmless gitleaks hits outside eval_data/, suppressed one at a time.
+# Format: file:rule-id:line (global fingerprints, valid in every commit).
+# If one of these lines moves, the fingerprint must be updated after checking
+# the new hit again. Never add a fingerprint without looking at the hit.
+
+# SHA-256 of the token-probe training data (key "token_probe_data_hash"), not a secret.
+configs/probe-v1.json:generic-api-key:9
+# Public PEM armor and OpenSSH key-type header constants (FORMAT_CONSTANTS), not values.
+scripts/overlap_check.py:generic-api-key:30
+# Synthetic test fixtures: fake values generated for offline tests.
+tests/_tiny.py:generic-api-key:30
+tests/test_stage2.py:generic-api-key:53

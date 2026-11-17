@@ -1,0 +1,53 @@
+{
+ "name": "probe-v1",
+ "frozen": "2026-11-16",
+ "source_run": "l17",
+ "model_id": "Qwen/Qwen3-1.7B",
+ "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+ "dtype": "bf16",
+ "layer": 15,
+ "token_probe_data_hash": "951891887fe40eefb8319c1da8cc8965afc86b52fe2879da591618e84301787f",
+ "seed": 0,
+ "training_files_sha256": {
+  "data_out/train_s0_n12000.jsonl": "0cd6f64fa843f3890c111f55cb0d6741cced0ab9bb6ffb15a59d7332e62e9ad9",
+  "data_out/mined/r1.jsonl": "5ed514225b9b807acfe95e0b53a05cceb278aef52676dd2ec0782c6e3147c16b",
+  "data_out/mined/r2.jsonl": "0f79c20de856cdeacefc4e86f8dc959751a1fed688ef0a8f629b805e5cd175cb",
+  "data_out/lk_n5000_nodoc.jsonl": "af06e3fcb4c36a2c27a3498d1b1a4787ca380dbdfa29ef7a1f8a536615b3a9f2"
+ },
+ "recipe": [
+  "castellan synth --n 12000 --seed 0 --out data_out/train_s0_n12000.jsonl",
+  "real-code negatives r1, r2: scripts/mine_negatives.py (github-code-clean permissive subset, contamination rules a to g)",
+  "python scripts/build_lookalikes.py --n 5000 --drop-category doc_example --out data_out/lk_n5000_nodoc.jsonl",
+  "scripts/fulliter.sh l12 'synth r1 r2 lk_n5000_nodoc' (token probe, layer 15)",
+  "scripts/s2iter.sh l17 l12_tok --target-recall 0.90 --ctx 64 --target-doc-fpr 0.01 --mlp 256"
+ ],
+ "stage2": {
+  "threshold": 0.7489123344421388,
+  "ctx": 64,
+  "prop_lo_floor": 0.0,
+  "extend_values": false,
+  "class_thresholds": null,
+  "layer2": null
+ },
+ "stage2_meta": {
+  "C": 0.001,
+  "mlp_hidden": 256,
+  "val_auroc": 0.9814044735246843,
+  "target_doc_fpr": 0.01,
+  "doc_fpr_info": {
+   "n_neg_val_docs": 2245,
+   "neg_val_doc_flag_rate": 0.009799554565701559,
+   "val_candidate_recall": 0.8847795163584637
+  },
+  "n_train": 58595,
+  "n_val": 13896
+ },
+ "bundle_files_sha256": {
+  "bundle.json": "0d305d086837b9b6574e1416cae137422656a61d951d3f52f9f8f690fcd86352",
+  "probe.npz": "e368f311a874ad49fbd9a50fae1e9b021ac523f027cc5b6031c8401838d00ae2",
+  "stage2/stage2.json": "12ff0ab0b11a833ae46cb7d743c7c99da705e993b4ca8ce0482ea87f0663c5d4",
+  "stage2/stage2.npz": "05f1ff6a81f9a41aa91ff2d491392f8a8aa42168d27bb09b7160924b0e743e05"
+ },
+ "weights_in_git": false,
+ "note": "Weights live in bundles/probe-v1 (copy of bundles/l17), outside git like every bundle. Verify with the hashes above."
+}

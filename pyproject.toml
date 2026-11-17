@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "castellan"
+version = "0.0.1"
+description = "Detect secrets and PII in LLM and agent traffic with residual-stream probes."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "numpy>=1.26",
+    "scikit-learn>=1.4",
+]
+
+[project.optional-dependencies]
+torch = [
+    "torch>=2.4",
+    "transformers>=4.51",
+    "tokenizers>=0.21",
+    "safetensors>=0.4",
+]
+presidio = [
+    "presidio-analyzer>=2.2",
+    "spacy>=3.7",
+]
+server = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+]
+data = [
+    "pyyaml>=6",
+    "datasets>=2.19",
+]
+dev = [
+    "pytest>=8",
+]
+analysis = [
+    "rapidfuzz>=3",
+    "matplotlib>=3.8",
+]
+all = [
+    "castellan[torch,presidio,server,data,dev,analysis]",
+]
+
+[project.scripts]
+castellan = "castellan.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/castellan"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "torch: needs the [torch] extra",
+]

@@ -1,0 +1,40 @@
+# Label map for ai4privacy/pii-masking-400k (records have source_text and
+# privacy_mask with start, end, label). NOT USED YET: the dataset license
+# is unclear (license: other) and is waiting on the user. See EXPERIMENTS.md.
+# Labels not listed here are dropped and counted by the converter.
+dataset: ai4privacy/pii-masking-400k
+text_field: source_text
+spans_field: privacy_mask
+start_key: start
+end_key: end
+label_key: label
+language_field: language
+languages: [en]
+carrier: prose
+labels:
+  GIVENNAME: PERSON
+  SURNAME: PERSON
+  EMAIL: EMAIL
+  TELEPHONENUM: PHONE
+  CREDITCARDNUMBER: CARD
+  ACCOUNTNUM: CARD
+  SOCIALNUM: GOV_ID
+  IDCARDNUM: GOV_ID
+  DRIVERLICENSENUM: GOV_ID
+  TAXNUM: GOV_ID
+  PASSPORTNUM: GOV_ID
+  IP: IP_ADDRESS
+  STREET: ADDRESS
+  BUILDINGNUM: ADDRESS
+  CITY: ADDRESS
+  ZIPCODE: ADDRESS
+  PASSWORD: SECRET_GENERIC
+  # identifying only in context, or not in our label set
+  USERNAME: CONTEXTUAL
+  DATEOFBIRTH: CONTEXTUAL
+  TIME: null
+  DATE: null
+  AGE: null
+  GENDER: null
+  SEX: null
+  TITLE: null
